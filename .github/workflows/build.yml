@@ -16,8 +16,12 @@ jobs:
             libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
       - name: Install buildozer
         run: pip install buildozer cython==0.29.36
+      - name: Pre-accept Android SDK licenses
+        run: |
+          yes | buildozer android update || true
       - name: Build APK
-        run: buildozer -v android debug
+        run: |
+          yes | buildozer -v android debug
       - uses: actions/upload-artifact@v4
         with:
           name: apk

@@ -9,7 +9,7 @@ source.include_exts = py,png,jpg,kv,atlas,json
 version = 1.0.0
 
 # 打包进 APK 的 Python 依赖
-requirements = python3,kivy==2.3.0,requests,urllib3,certifi,charset-normalizer,idna,plyer
+requirements = python3,kivy==2.3.1,requests,urllib3,certifi,charset-normalizer,idna,plyer
 
 orientation = portrait
 fullscreen = 0

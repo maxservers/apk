@@ -6,15 +6,32 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-
-      - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
-        id: buildozer
+      - uses: actions/setup-python@v5
         with:
-          workdir: .
-          buildozer_version: stable
+          python-version: "3.11"
+
+      - name: Install system deps
+        run: |
+          sudo apt update
+          sudo apt install -y build-essential git zip unzip openjdk-17-jdk \
+            autoconf libtool pkg-config zlib1g-dev libncurses5-dev \
+            libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+
+      - name: Install buildozer
+        run: |
+          pip install --upgrade "pip==23.3.2"
+          pip install buildozer
+
+      - name: Pre-accept Android SDK licenses
+        run: |
+          yes | buildozer android update || true
+
+      - name: Build APK
+        env:
+          PIP_NO_BUILD_ISOLATION: "1"
+        run: buildozer -v android debug
 
       - uses: actions/upload-artifact@v4
         with:
           name: apk
-          path: ${{ steps.buildozer.outputs.filename }}
+          path: bin/*.apk

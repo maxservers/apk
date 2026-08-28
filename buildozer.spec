@@ -13,9 +13,11 @@ version = 1.0.0
 #   因为较新 Python 版本会导致: (1) remote_debugging.c 里 preadv/pwritev 在
 #   低于 API24 的 Android 上编译报错; (2) kivy/pyjnius 等包尚未声明支持该
 #   Python 版本, 导致 pip 依赖解析显示 "no versions"。
+# - hostpython3 必须与 python3 版本一致 (p4a 强制校验), 否则报错:
+#   "python3 should have same version as hostpython3, X != Y"
 # - kivy 锁定 2.3.1 (而非 2.3.0): 2.3.0 与 Cython 3.x 生成的 OpenGL 绑定代码
 #   不兼容, 会报 "too few arguments to function call" 编译错误; 2.3.1 修复了此问题。
-requirements = python3==3.11.9,kivy==2.3.1,requests,urllib3,certifi,charset-normalizer,idna,plyer
+requirements = python3==3.11.9,hostpython3==3.11.9,kivy==2.3.1,requests,urllib3,certifi,charset-normalizer,idna,plyer
 
 orientation = portrait
 fullscreen = 0

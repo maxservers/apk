@@ -11,10 +11,10 @@ version = 1.0.0
 # 依赖版本说明:
 # - kivy 锁定 2.3.1 (而非 2.3.0): 2.3.0 与较新 Cython 生成的 OpenGL 绑定代码
 #   不兼容, 会报 "too few arguments to function call" 编译错误。
-# - python3/hostpython3 不再手动锁定精确小版本号: 交给 buildozer-action 内置的
-#   已验证组合处理, 避免因锁定的补丁版本与 p4a 补丁不匹配导致 grp 模块等
-#   编译失败 (Android 没有 Unix 用户组数据库, 需要 p4a 补丁禁用 grp 模块,
-#   该补丁按具体小版本号编写, 版本号锁太细容易对不上)。
+# - python3/hostpython3 不手动锁定精确小版本号: 交给 python-for-android
+#   自己选择默认已测试版本, 避免因锁定的补丁版本与 p4a 补丁对不上导致 grp
+#   模块等编译失败 (Android 没有 Unix 用户组数据库, 需要 p4a 补丁禁用 grp
+#   模块, 该补丁按具体小版本号编写, 版本号锁太细容易对不上)。
 requirements = python3,kivy==2.3.1,requests,urllib3,certifi,charset-normalizer,idna,plyer
 
 orientation = portrait
